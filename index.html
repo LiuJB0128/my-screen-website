@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>大屏可视化项目</title>
+  <script>
+    let clientWidth = document.documentElement.clientWidth
+    let clientHeight = document.documentElement.clientHeight
+    window.pageWidth = clientWidth / clientHeight > 16 / 9 ? clientHeight * (16 / 9) : clientWidth
+    const pageHeight = pageWidth / (16 / 9)
+    const string = `<style>html{font-size: ${pageWidth / 100}px}</style>`
+    document.write(string)
+
+    function refresh() {
+      window.location.reload()
+    }
+
+    const debounce = (fn, time) => {
+      let timer = null
+      return (...args) => {
+        if (timer !== null) {
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          fn(...args)
+          timer = null
+        }, time)
+      }
+    }
+    const autoRefresh = debounce(refresh, 300)
+    window.addEventListener('resize', autoRefresh)
+  </script>
+<script type="module" crossorigin src="./assets/index.25571658.js"></script>
+  <link rel="modulepreload" href="./assets/vendor.f26b4f58.js">
+  <link rel="stylesheet" href="./assets/index.dd61f9d9.css">
+</head>
+<body>
+<div id="root"></div>
+<script>
+  root.style.width = pageWidth + 'px'
+  root.style.height = pageHeight + 'px'
+  root.style.marginTop = (clientHeight - pageHeight) / 2 + 'px'
+</script>
+
+</body>
+</html>
